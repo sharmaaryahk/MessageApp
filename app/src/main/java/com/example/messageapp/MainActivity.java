@@ -132,12 +132,12 @@ public class MainActivity extends AppCompatActivity {
         if (sender.equals("IRCTC") || sen.equals("IRCTC"))
         {
             x=1;
-            pnr = words[3];
-            tno = words[5];
-            ast = words[7];
-            adt = words[9];
-            ati = words[11];
-            sno = words[13];
+            pnr = words[3];  //pnr number
+            tno = words[5];  // train no
+            ast = words[7];  // arrival station
+            adt = words[9];  // arrival date
+            ati = words[11];  // arrival time
+            sno = words[13];  //seat no
 
             //Toast.makeText(this, sen+pnr+tno+ast+adt+ati+sno, Toast.LENGTH_LONG).show();
 
