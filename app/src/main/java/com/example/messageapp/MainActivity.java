@@ -121,23 +121,30 @@ public class MainActivity extends AppCompatActivity {
         if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
         arrayAdapter.clear();
         String sender = smsInboxCursor.getString(indexAddress);
-        String str = "SMS From: " + smsInboxCursor.getString(indexAddress) +
-                "\n" + smsInboxCursor.getString(indexBody) + "\n";
+        String str = "SMS From: " + smsInboxCursor.getString(indexAddress) + "\n" + smsInboxCursor.getString(indexBody) + "\n";
         String str1 = smsInboxCursor.getString(indexBody);
         arrayAdapter.add(str);
-        String[] words=str1.split("\\s");
-        String  sen = words[1];
+
+
+        String[] words=str1.split(",");
+        String[]  Wsen = words[0].split(":");
+        String  sen = Wsen[1];
 
 
         if (sender.equals("IRCTC") || sen.equals("IRCTC"))
         {
             x=1;
-            pnr = words[3];  //pnr number
-            tno = words[5];  // train no
-            ast = words[7];  // arrival station
-            adt = words[9];  // arrival date
-            ati = words[11];  // arrival time
-            sno = words[13];  //seat no
+            String[]  Wpnr = words[1].split(":");
+            pnr = Wpnr[1];  // PNR No
+            String[]  Wtno = words[2].split(":");
+            tno = Wtno[1];  // Train No
+            String[]  Wast = words[6].split(" ");
+            ast = Wast[0];  // Arrival Station
+            String[]  Wadt = words[3].split(":");
+            adt = Wadt[1];  // Arrival Date
+            String[]  Wati = words[4].split(":");
+            ati = Wati[1] +":"+Wati[2];  // Arrival Time
+            sno = words[8]; // Seat No
 
             //Toast.makeText(this, sen+pnr+tno+ast+adt+ati+sno, Toast.LENGTH_LONG).show();
 
@@ -147,9 +154,7 @@ public class MainActivity extends AppCompatActivity {
         {
             Toast.makeText(this, "Inappropriate Message", Toast.LENGTH_LONG).show();
         }
-
-
-//messages.setSelection(arrayAdapter.getCount() - 1);
+        //messages.setSelection(arrayAdapter.getCount() - 1);
     }
 
     public void onSendClick(View view)
