@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         int indexAddress = smsInboxCursor.getColumnIndex("address");
         if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
         arrayAdapter.clear();
+        try {
         String sender = smsInboxCursor.getString(indexAddress);
         String str = "SMS From: " + smsInboxCursor.getString(indexAddress) + "\n" + smsInboxCursor.getString(indexBody) + "\n";
         String str1 = smsInboxCursor.getString(indexBody);
@@ -154,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
         {
             Toast.makeText(this, "Inappropriate Message", Toast.LENGTH_LONG).show();
         }
-        //messages.setSelection(arrayAdapter.getCount() - 1);
+        } catch (Exception e) { Toast.makeText(this, "Inappropriate Message", Toast.LENGTH_LONG).show();}
     }
 
     public void onSendClick(View view)
